@@ -1,88 +1,117 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
-       1. NAVBAR SCROLL EFFECT
+       1. NAVBAR SCROLL EFFECT & ACTIVE LINK HIGHLIGHTING
        ========================================================================== */
     const header = document.querySelector('.main-header');
-    
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    let isScrolled = false;
     function checkHeaderScroll() {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        const scrolled = window.scrollY > 50;
+        if (scrolled !== isScrolled) {
+            isScrolled = scrolled;
+            if (isScrolled) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
     }
-    
-    // Check on load and on scroll
+
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                checkHeaderScroll();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
     checkHeaderScroll();
-    window.addEventListener('scroll', checkHeaderScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // High-performance IntersectionObserver for nav active link highlighting
+    if ('IntersectionObserver' in window && sections.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -65% 0px',
+            threshold: 0
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const targetHash = `#${id}`;
+
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === targetHash);
+                    });
+                    mobileNavLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === targetHash);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => sectionObserver.observe(section));
+    }
 
     /* ==========================================================================
        2. MOBILE MENU DRAWER
        ========================================================================== */
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
     function toggleMobileMenu() {
+        if (!mobileMenuBtn || !mobileNavOverlay) return;
         mobileMenuBtn.classList.toggle('open');
         mobileNavOverlay.classList.toggle('open');
-        // Prevent body scroll when menu is open
         document.body.style.overflow = mobileNavOverlay.classList.contains('open') ? 'hidden' : '';
     }
 
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    }
 
-    // Close menu when a link is clicked
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (mobileNavOverlay.classList.contains('open')) {
-                toggleMobileMenu();
+    /* ==========================================================================
+       3. SMOOTH SCROLL ANCHOR NAVIGATION
+       ========================================================================== */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetHref = this.getAttribute('href');
+            if (!targetHref || targetHref === '#') {
+                if (targetHref === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                return;
+            }
+
+            const targetElement = document.querySelector(targetHref);
+            if (targetElement) {
+                e.preventDefault();
+
+                if (mobileNavOverlay && mobileNavOverlay.classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
     });
-
-    /* ==========================================================================
-       3. ACTIVE LINK ON SCROLL
-       ========================================================================== */
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-
-    function highlightActiveLink() {
-        const scrollPosition = window.scrollY + 100; // Offset for sticky header
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-                
-                mobileNavLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
-        });
-        
-        // Special case for Home / top of the page
-        if (window.scrollY < 200) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            mobileNavLinks.forEach(link => link.classList.remove('active'));
-            navLinks[0].classList.add('active');
-            mobileNavLinks[0].classList.add('active');
-        }
-    }
-
-    window.addEventListener('scroll', highlightActiveLink);
 
     /* ==========================================================================
        4. PORTFOLIO FILTER

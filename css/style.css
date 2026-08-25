@@ -39,6 +39,10 @@ html {
     scroll-padding-top: 80px;
 }
 
+section[id] {
+    scroll-margin-top: 90px;
+}
+
 body {
     background-color: var(--color-bg-black);
     color: var(--color-text-white);
@@ -159,6 +163,8 @@ img {
     border-bottom: 1px solid transparent;
     background-color: transparent;
     height: 80px;
+    will-change: height, background-color;
+    transform: translateZ(0);
 }
 
 .main-header.scrolled {
@@ -180,8 +186,27 @@ img {
 .logo {
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     letter-spacing: -0.03em;
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+}
+
+.logo-icon-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(208, 19, 43, 0.4));
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo:hover .logo-icon-img {
+    transform: scale(1.12) rotate(-4deg);
+}
+
+.logo-text-wrap {
     display: flex;
     align-items: center;
 }
@@ -194,6 +219,18 @@ img {
     color: var(--color-primary);
     font-style: italic;
     margin-left: 6px;
+}
+
+.footer-logo-img {
+    max-height: 70px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.footer-logo-img:hover {
+    transform: scale(1.04);
 }
 
 /* Nav Links */
@@ -457,6 +494,7 @@ img {
     align-items: center;
     width: 200%;
     animation: ticker 25s linear infinite;
+    will-change: transform;
 }
 
 .ticker-item {
@@ -1022,7 +1060,6 @@ section {
     background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1920&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     padding: 7rem 0;
     overflow: hidden;
 }
