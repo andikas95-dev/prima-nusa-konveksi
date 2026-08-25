@@ -159,25 +159,34 @@
         <!-- Hero Section -->
         <section class="hero-section" id="home">
             <div class="hero-bg-overlay"></div>
-            <div class="container hero-content">
-                <div class="hero-badge-wrap">
-                    <span class="hero-badge">⚡ PREMIUM SPORTSWEAR MANUFACTURE</span>
-                </div>
-                <h1 class="hero-title">LEVEL UP<br><span class="text-red">YOUR GAME</span></h1>
-                <p class="hero-subtitle">
-                    Kustomisasi jersey olahraga premium dengan teknologi sublimasi digital 4K. Dirancang khusus untuk performa maksimal, kenyamanan luar biasa, dan identitas tim yang tangguh.
-                </p>
-                
-                <!-- Hero Feature Pills -->
-                <div class="hero-pills">
-                    <span class="pill-item">🛡️ Garansi Tinta Anti-Luntur</span>
-                    <span class="pill-item">🔥 Min. Order 12 Pcs</span>
-                    <span class="pill-item">🎨 Gratis Konsultasi Desain</span>
+            
+            <div class="container hero-grid-container">
+                <div class="hero-content">
+                    <div class="hero-badge-wrap">
+                        <span class="hero-badge">⚡ PREMIUM SPORTSWEAR MANUFACTURE</span>
+                    </div>
+                    <h1 class="hero-title">LEVEL UP<br><span class="text-red">YOUR GAME</span></h1>
+                    <p class="hero-subtitle">
+                        Kustomisasi jersey olahraga premium dengan teknologi sublimasi digital 4K. Dirancang khusus untuk performa maksimal, kenyamanan luar biasa, dan identitas tim yang tangguh.
+                    </p>
+                    
+                    <!-- Hero Feature Pills -->
+                    <div class="hero-pills">
+                        <span class="pill-item">🛡️ Garansi Tinta Anti-Luntur</span>
+                        <span class="pill-item">🔥 Min. Order 12 Pcs</span>
+                        <span class="pill-item">🎨 Gratis Konsultasi Desain</span>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <a href="#portofolio" class="btn btn-red btn-large">Lihat Portofolio</a>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Prima%20Nusa%20Sport,%20saya%20ingin%20konsultasi%20pembuatan%20jersey%20olahraga." target="_blank" class="btn btn-outline btn-large">Konsultasi Desain (Gratis)</a>
+                    </div>
                 </div>
 
-                <div class="hero-buttons">
-                    <a href="#portofolio" class="btn btn-red btn-large">Lihat Portofolio</a>
-                    <a href="https://wa.me/6281234567890?text=Halo%20Prima%20Nusa%20Sport,%20saya%20ingin%20konsultasi%20pembuatan%20jersey%20olahraga." target="_blank" class="btn btn-outline btn-large">Konsultasi Desain (Gratis)</a>
+                <!-- 3D WebGL Canvas Stage -->
+                <div class="hero-visual-stage">
+                    <div class="hero-canvas-glow"></div>
+                    <canvas id="hero-3d-canvas"></canvas>
                 </div>
             </div>
             
@@ -832,7 +841,9 @@
         </div>
     </footer>
 
-    <!-- Script File -->
+    <!-- Script Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/hero-animation.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
