@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shieldGeometry.center();
 
     // Primary Shield Material (Dark Metallic Onyx)
-    const shieldMaterial = new THREE.MeshStandardMaterial({
+    const shieldMaterial = new THREE.MeshPhysicalMaterial({
         color: 0x111115,
         metalness: 0.85,
         roughness: 0.2,
