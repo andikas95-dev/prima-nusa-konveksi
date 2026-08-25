@@ -1,0 +1,6 @@
+# robots.txt for Prima Nusa Sport (https://primanusasport.com)
+User-agent: *
+Allow: /
+
+# Sitemap reference
+Sitemap: https://primanusasport.com/sitemap.xml

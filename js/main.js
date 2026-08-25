@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ==========================================================================
        7. WHATSAPP LINK GENERATOR
        ========================================================================== */
-    const WHATSAPP_NUMBER = '6281234567890'; // Ganti dengan nomor WhatsApp pemilik konveksi
+    const WHATSAPP_NUMBER = '6281234567890'; // Ganti dengan nomor WhatsApp Prima Nusa Sport
 
     // Quick Order Form
     const orderForm = document.getElementById('quick-order-form');
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const category = document.getElementById('order-category').value;
             const qty = document.getElementById('order-qty').value;
             
-            let message = `Halo Prima Konveksi, saya *${name}* ingin melakukan pemesanan jersey custom.\n\n*Detail Pesanan:*\n- *Kategori:* ${category}\n- *Jumlah:* ${qty} pcs`;
+            let message = `Halo Prima Nusa Sport, saya *${name}* ingin melakukan pemesanan jersey custom.\n\n*Detail Pesanan:*\n- *Kategori:* ${category}\n- *Jumlah:* ${qty} pcs`;
             if (phone) {
                 message += `\n- *Kontak WA:* ${phone}`;
             }
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const productName = button.getAttribute('data-product');
             const categoryName = button.getAttribute('data-category');
             
-            const message = `Halo Prima Konveksi, saya tertarik dengan desain *${productName}* (Kategori: ${categoryName}) yang saya lihat di website. Saya ingin berkonsultasi untuk kustomisasi desain ini untuk tim saya.`;
+            const message = `Halo Prima Nusa Sport, saya tertarik dengan desain *${productName}* (Kategori: ${categoryName}) yang saya lihat di website. Saya ingin berkonsultasi untuk kustomisasi desain ini untuk tim saya.`;
             
             const encodedMessage = encodeURIComponent(message);
             const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;

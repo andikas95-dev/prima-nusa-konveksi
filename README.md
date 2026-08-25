@@ -1,6 +1,6 @@
-# Prima Konveksi - Premium Sports Apparel Landing Page 🎽⚽🔥
+# Prima Nusa Sport - Premium Sports Apparel Landing Page 🎽⚽🔥
 
-Landing page resmi **Prima Konveksi**, produsen pakaian olahraga (*sports apparel*) custom berkualitas tinggi yang mengkhususkan diri dalam pembuatan jersey sepak bola, futsal, e-sports, running, cycling, serta jaket tracksuit custom dengan teknik cetak sublimasi digital.
+Landing page resmi **Prima Nusa Sport**, produsen pakaian olahraga (*sports apparel*) custom berkualitas tinggi yang mengkhususkan diri dalam pembuatan jersey sepak bola, futsal, e-sports, running, cycling, serta jaket tracksuit custom dengan teknik cetak sublimasi digital.
 
 ---
 
@@ -75,4 +75,4 @@ Nomor dan template pesan WhatsApp disesuaikan pada file `js/main.js` atau atribu
 
 ## 📄 Lisensi & Hak Cipta
 
-© 2026 Prima Konveksi. Hak Cipta Dilindungi Undang-Undang.
+© 2026 Prima Nusa Sport. Hak Cipta Dilindungi Undang-Undang.
