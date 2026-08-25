@@ -922,15 +922,28 @@ section {
     font-size: 0.95rem;
 }
 
+.size-table th:first-child,
+.size-table td:first-child {
+    width: 150px;
+}
+
+.size-table td:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .badge-pop {
     background: var(--color-primary);
     color: white;
     font-size: 0.65rem;
     font-weight: 700;
-    padding: 2px 6px;
+    padding: 3px 6px;
     border-radius: 2px;
-    margin-left: 6px;
+    margin-left: auto;
     font-family: var(--font-heading);
+    letter-spacing: 0.05em;
+    line-height: 1;
 }
 
 .size-table tr:hover td {
