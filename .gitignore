@@ -1,0 +1,11 @@
+# Planning & Artifacts
+implementation_plan.md
+prd.md
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE settings
+.vscode/
+.idea/
