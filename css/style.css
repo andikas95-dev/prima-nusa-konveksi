@@ -515,12 +515,13 @@ img {
 .hero-content-video {
     position: relative;
     z-index: 2;
-    max-width: 820px;
+    max-width: 860px;
     width: 100%;
-    margin-left: 0;
+    margin-left: clamp(0.5rem, 3.5vw, 3rem);
     margin-right: auto;
     text-align: left;
 }
+
 
 
 .hero-badge-wrap {
