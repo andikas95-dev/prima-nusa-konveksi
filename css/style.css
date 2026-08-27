@@ -517,10 +517,11 @@ img {
     z-index: 2;
     max-width: 860px;
     width: 100%;
-    margin-left: clamp(0.5rem, 3.5vw, 3rem);
+    margin-left: 0;
     margin-right: auto;
     text-align: left;
 }
+
 
 
 
