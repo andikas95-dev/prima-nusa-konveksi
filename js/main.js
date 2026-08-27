@@ -1,276 +1,126 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const WA_NUMBER = '6281234567890';
+    const openWA = (msg) => window.open(`https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`, '_blank');
 
-    /* ==========================================================================
-       1. NAVBAR SCROLL EFFECT & ACTIVE LINK HIGHLIGHTING
-       ========================================================================== */
+    /* 1. Header Scroll & Nav Active Highlight */
     const header = document.querySelector('.main-header');
+    window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-    let isScrolled = false;
-    function checkHeaderScroll() {
-        const scrolled = window.scrollY > 50;
-        if (scrolled !== isScrolled) {
-            isScrolled = scrolled;
-            if (isScrolled) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }
-    }
-
-    let ticking = false;
-    function onScroll() {
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                checkHeaderScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }
-
-    checkHeaderScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // High-performance IntersectionObserver for nav active link highlighting
-    if ('IntersectionObserver' in window && sections.length > 0) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '-20% 0px -65% 0px',
-            threshold: 0
-        };
-
-        const sectionObserver = new IntersectionObserver((entries) => {
+    if ('IntersectionObserver' in window && sections.length) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const id = entry.target.getAttribute('id');
-                    const targetHash = `#${id}`;
-
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === targetHash);
-                    });
-                    mobileNavLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === targetHash);
-                    });
+                    const hash = `#${entry.target.id}`;
+                    navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
                 }
             });
-        }, observerOptions);
-
-        sections.forEach(section => sectionObserver.observe(section));
+        }, { rootMargin: '-20% 0px -65% 0px' });
+        sections.forEach(s => observer.observe(s));
     }
 
-    /* ==========================================================================
-       2. MOBILE MENU DRAWER
-       ========================================================================== */
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
+    /* 2. Mobile Menu Toggle */
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav-overlay');
+    mobileBtn?.addEventListener('click', () => {
+        const open = mobileBtn.classList.toggle('open');
+        mobileNav?.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+    });
 
-    function toggleMobileMenu() {
-        if (!mobileMenuBtn || !mobileNavOverlay) return;
-        mobileMenuBtn.classList.toggle('open');
-        mobileNavOverlay.classList.toggle('open');
-        document.body.style.overflow = mobileNavOverlay.classList.contains('open') ? 'hidden' : '';
-    }
-
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-    }
-
-    /* ==========================================================================
-       3. SMOOTH SCROLL ANCHOR NAVIGATION
-       ========================================================================== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetHref = this.getAttribute('href');
-            if (!targetHref || targetHref === '#') {
-                if (targetHref === '#') {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-                return;
-            }
-
-            const targetElement = document.querySelector(targetHref);
-            if (targetElement) {
+    /* 3. Event Delegation: Smooth Scroll, Portfolio Filters, Size Tabs, Item CTAs */
+    document.addEventListener('click', (e) => {
+        // Anchor smooth scroll
+        const anchor = e.target.closest('a[href^="#"]');
+        if (anchor) {
+            const href = anchor.getAttribute('href');
+            if (href === '#') {
                 e.preventDefault();
-
-                if (mobileNavOverlay && mobileNavOverlay.classList.contains('open')) {
-                    toggleMobileMenu();
-                }
-
-                const headerOffset = 80;
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                return window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-        });
-    });
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                mobileBtn?.classList.remove('open');
+                mobileNav?.classList.remove('open');
+                document.body.style.overflow = '';
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+            return;
+        }
 
-    /* ==========================================================================
-       4. PORTFOLIO FILTER
-       ========================================================================== */
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Remove active class from all buttons and add to clicked
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            const filterValue = button.getAttribute('data-filter');
-            
-            portfolioItems.forEach(item => {
-                const category = item.getAttribute('data-category');
-                
-                if (filterValue === 'all' || filterValue === category) {
-                    item.classList.remove('hide');
-                } else {
-                    item.classList.add('hide');
-                }
+        // Portfolio Filter Buttons
+        const filterBtn = e.target.closest('.filter-btn');
+        if (filterBtn) {
+            const filterContainer = filterBtn.closest('#portfolio-filters');
+            filterContainer?.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            filterBtn.classList.add('active');
+            const cat = filterBtn.dataset.filter;
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                const show = cat === 'all' || item.dataset.category === cat;
+                item.classList.toggle('hide', !show);
             });
-        });
-    });
+            return;
+        }
 
-    /* ==========================================================================
-       5. SIZE CHART TABS
-       ========================================================================== */
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const sizeContents = document.querySelectorAll('.size-content');
-
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            const tabTarget = button.getAttribute('data-tab');
-            
-            sizeContents.forEach(content => {
-                content.classList.remove('active');
-                if (content.getAttribute('id') === `tab-${tabTarget}`) {
-                    content.classList.add('active');
-                }
+        // Size Chart Tabs
+        const tabBtn = e.target.closest('#size-tabs .tab-btn');
+        if (tabBtn) {
+            const tabsContainer = tabBtn.closest('#size-tabs');
+            tabsContainer?.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            tabBtn.classList.add('active');
+            document.querySelectorAll('.size-content').forEach(c => {
+                c.classList.toggle('active', c.id === `tab-${tabBtn.dataset.tab}`);
             });
-        });
+            return;
+        }
+
+        // Portfolio Item WA Order Button
+        const itemBtn = e.target.closest('.btn-order-item');
+        if (itemBtn) {
+            e.stopPropagation();
+            const { product, category } = itemBtn.dataset;
+            openWA(`Halo Prima Nusa Sport, saya tertarik dengan sampel *${product}* (Kategori: ${category}) dari website. Saya ingin berkonsultasi untuk kustomisasi desain tim.`);
+        }
     });
 
-    /* ==========================================================================
-       6. TESTIMONIAL SLIDER
-       ========================================================================== */
+    /* 4. Testimonial Slider */
     const slides = document.querySelectorAll('.testi-slide');
     const dots = document.querySelectorAll('.testi-dots .dot');
-    const prevBtn = document.getElementById('prev-testi');
-    const nextBtn = document.getElementById('next-testi');
-    let currentSlide = 0;
-    let slideInterval;
+    let slideIdx = 0;
+    let autoTimer;
 
-    function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.remove('active'));
-        
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
+    function gotoSlide(idx) {
+        if (!slides.length) return;
+        slideIdx = (idx + slides.length) % slides.length;
+        slides.forEach((s, i) => s.classList.toggle('active', i === slideIdx));
+        dots.forEach((d, i) => d.classList.toggle('active', i === slideIdx));
     }
 
-    function nextSlide() {
-        let index = currentSlide + 1;
-        if (index >= slides.length) {
-            index = 0;
-        }
-        showSlide(index);
-    }
+    const resetTimer = () => {
+        clearInterval(autoTimer);
+        autoTimer = setInterval(() => gotoSlide(slideIdx + 1), 5500);
+    };
 
-    function prevSlide() {
-        let index = currentSlide - 1;
-        if (index < 0) {
-            index = slides.length - 1;
-        }
-        showSlide(index);
-    }
+    document.getElementById('next-testi')?.addEventListener('click', () => { gotoSlide(slideIdx + 1); resetTimer(); });
+    document.getElementById('prev-testi')?.addEventListener('click', () => { gotoSlide(slideIdx - 1); resetTimer(); });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { gotoSlide(i); resetTimer(); }));
 
-    // Controls listeners
-    nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAutoplay();
-    });
-    
-    prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAutoplay();
-    });
+    if (slides.length) resetTimer();
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            const slideIndex = parseInt(e.target.getAttribute('data-slide'));
-            showSlide(slideIndex);
-            resetAutoplay();
-        });
-    });
+    /* 5. Quick Order Form Handler */
+    document.getElementById('quick-order-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('order-name').value;
+        const phone = document.getElementById('order-phone')?.value;
+        const category = document.getElementById('order-category').value;
+        const qty = document.getElementById('order-qty').value;
 
-    // Autoplay
-    function startAutoplay() {
-        slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function resetAutoplay() {
-        clearInterval(slideInterval);
-        startAutoplay();
-    }
-
-    startAutoplay();
-
-    /* ==========================================================================
-       7. WHATSAPP LINK GENERATOR
-       ========================================================================== */
-    const WHATSAPP_NUMBER = '6281234567890'; // Ganti dengan nomor WhatsApp Prima Nusa Sport
-
-    // Quick Order Form
-    const orderForm = document.getElementById('quick-order-form');
-    if (orderForm) {
-        orderForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('order-name').value;
-            const phone = document.getElementById('order-phone') ? document.getElementById('order-phone').value : '';
-            const category = document.getElementById('order-category').value;
-            const qty = document.getElementById('order-qty').value;
-            
-            let message = `Halo Prima Nusa Sport, saya *${name}* ingin melakukan pemesanan jersey custom.\n\n*Detail Pesanan:*\n- *Kategori:* ${category}\n- *Jumlah:* ${qty} pcs`;
-            if (phone) {
-                message += `\n- *Kontak WA:* ${phone}`;
-            }
-            message += `\n\nSaya ingin berkonsultasi mengenai konsep desain dan jenis bahan kain. Terima kasih!`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;
-            
-            window.open(waUrl, '_blank');
-        });
-    }
-
-    // individual Portfolio Item CTA click
-    const itemOrderButtons = document.querySelectorAll('.btn-order-item');
-    itemOrderButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent triggering any other event
-            
-            const productName = button.getAttribute('data-product');
-            const categoryName = button.getAttribute('data-category');
-            
-            const message = `Halo Prima Nusa Sport, saya tertarik dengan desain *${productName}* (Kategori: ${categoryName}) yang saya lihat di website. Saya ingin berkonsultasi untuk kustomisasi desain ini untuk tim saya.`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;
-            
-            window.open(waUrl, '_blank');
-        });
+        let msg = `Halo Prima Nusa Sport, saya *${name}* ingin berkonsultasi & memesan jersey custom.\n\n*Rincian Pesanan:*\n- *Kategori:* ${category}\n- *Jumlah:* ${qty} pcs`;
+        if (phone) msg += `\n- *Kontak WA:* ${phone}`;
+        msg += `\n\nMohon info mengenai estimasi harga, pilihan bahan dryfit, dan alur pengerjaan mockup desain. Terima kasih!`;
+        openWA(msg);
     });
 });
+
