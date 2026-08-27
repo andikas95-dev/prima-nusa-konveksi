@@ -87,6 +87,134 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* 3. Event Delegation: Smooth Scroll, Portfolio Filters, Size Tabs, Item CTAs */
+    /* 3. Event Delegation & Portfolio Lightbox Engine */
+    const portfolioLightbox = document.getElementById('portfolio-lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxStage = document.getElementById('lightbox-stage');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCategory = document.getElementById('lightbox-category');
+    const lightboxTag = document.getElementById('lightbox-tag');
+    const lightboxFabric = document.getElementById('lightbox-fabric');
+    const lightboxPrint = document.getElementById('lightbox-print');
+    const lightboxLeadtime = document.getElementById('lightbox-leadtime');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    const lightboxThumbsContainer = document.getElementById('lightbox-thumbs-container');
+    const lightboxOrderCta = document.getElementById('lightbox-order-cta');
+    const lightboxPrevBtn = document.getElementById('lightbox-prev-btn');
+    const lightboxNextBtn = document.getElementById('lightbox-next-btn');
+    const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+    const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+    let currentVisibleItems = [];
+    let currentLightboxIdx = 0;
+    let lastFocusedElement = null;
+
+    function getVisibleItems() {
+        return Array.from(document.querySelectorAll('.portfolio-item:not(.hide)'));
+    }
+
+    function renderLightboxItem(index) {
+        currentVisibleItems = getVisibleItems();
+        if (!currentVisibleItems.length) return;
+
+        currentLightboxIdx = (index + currentVisibleItems.length) % currentVisibleItems.length;
+        const item = currentVisibleItems[currentLightboxIdx];
+        const dataset = item.dataset;
+
+        // Reset stage zoom
+        lightboxStage?.classList.remove('zoomed');
+
+        if (lightboxImg) lightboxImg.src = dataset.img || item.querySelector('img')?.src || '';
+        if (lightboxTitle) lightboxTitle.textContent = dataset.title || 'Jersey Custom';
+        if (lightboxCategory) lightboxCategory.textContent = dataset.categoryName || 'Sportswear';
+        if (lightboxTag) lightboxTag.textContent = dataset.tag || 'Official';
+        if (lightboxFabric) lightboxFabric.textContent = dataset.fabric || 'Dryfit Premium';
+        if (lightboxPrint) lightboxPrint.textContent = dataset.print || 'Full Sublimation';
+        if (lightboxLeadtime) lightboxLeadtime.textContent = dataset.leadtime || '7-10 Hari';
+        if (lightboxCounter) lightboxCounter.textContent = `Foto ${currentLightboxIdx + 1} dari ${currentVisibleItems.length}`;
+
+        // Render thumbnails
+        if (lightboxThumbsContainer) {
+            lightboxThumbsContainer.innerHTML = '';
+            currentVisibleItems.forEach((vItem, idx) => {
+                const thumb = document.createElement('div');
+                thumb.className = `lightbox-thumb ${idx === currentLightboxIdx ? 'active' : ''}`;
+                thumb.innerHTML = `<img src="${vItem.dataset.img || vItem.querySelector('img')?.src}" alt="Thumbnail ${idx + 1}">`;
+                thumb.addEventListener('click', () => renderLightboxItem(idx));
+                lightboxThumbsContainer.appendChild(thumb);
+            });
+        }
+    }
+
+    function openLightboxByElement(itemEl) {
+        lastFocusedElement = document.activeElement;
+        currentVisibleItems = getVisibleItems();
+        const itemIdx = currentVisibleItems.indexOf(itemEl);
+        renderLightboxItem(itemIdx >= 0 ? itemIdx : 0);
+
+        portfolioLightbox?.classList.add('active');
+        portfolioLightbox?.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        lightboxCloseBtn?.focus();
+    }
+
+    function closeLightbox() {
+        portfolioLightbox?.classList.remove('active');
+        portfolioLightbox?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        lightboxStage?.classList.remove('zoomed');
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
+    }
+
+    function navLightbox(direction) {
+        renderLightboxItem(currentLightboxIdx + direction);
+    }
+
+    // Lightbox Controls
+    lightboxCloseBtn?.addEventListener('click', closeLightbox);
+    lightboxBackdrop?.addEventListener('click', closeLightbox);
+    lightboxPrevBtn?.addEventListener('click', () => navLightbox(-1));
+    lightboxNextBtn?.addEventListener('click', () => navLightbox(1));
+
+    lightboxStage?.addEventListener('click', () => {
+        lightboxStage.classList.toggle('zoomed');
+    });
+
+    lightboxOrderCta?.addEventListener('click', () => {
+        const item = currentVisibleItems[currentLightboxIdx];
+        if (!item) return;
+        const { title, categoryName, fabric, print } = item.dataset;
+        const msg = `Halo Prima Nusa Sport, saya ingin memesan *${title}* (${categoryName}) dari sampel portofolio website.\n\n*Spesifikasi Pilihan:*\n- *Kain:* ${fabric}\n- *Cetak:* ${print}\n\nMohon info prosedur pembuatan mockup & estimasi total. Terima kasih!`;
+        openWA(msg);
+    });
+
+    // Keyboard Shortcuts & Focus Management
+    document.addEventListener('keydown', (e) => {
+        const isOpen = portfolioLightbox?.classList.contains('active');
+
+        if (!isOpen) {
+            if ((e.key === 'Enter' || e.key === ' ') && document.activeElement?.classList.contains('portfolio-item')) {
+                e.preventDefault();
+                openLightboxByElement(document.activeElement);
+            }
+            return;
+        }
+
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            navLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            navLightbox(1);
+        }
+    });
+
+    // Global Document Click Delegation
     document.addEventListener('click', (e) => {
         // Anchor smooth scroll
         const anchor = e.target.closest('a[href^="#"]');
@@ -121,6 +249,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Portfolio Item WA Order Button (inside card)
+        const itemOrderBtn = e.target.closest('.btn-order-item');
+        if (itemOrderBtn) {
+            e.stopPropagation();
+            const { product, category } = itemOrderBtn.dataset;
+            openWA(`Halo Prima Nusa Sport, saya tertarik dengan sampel *${product}* (Kategori: ${category}) dari website. Saya ingin berkonsultasi untuk kustomisasi desain tim.`);
+            return;
+        }
+
+        // Portfolio Item Click Trigger (Opens Lightbox Preview)
+        const itemCard = e.target.closest('.portfolio-item');
+        if (itemCard) {
+            openLightboxByElement(itemCard);
+            return;
+        }
+
         // Size Chart Tabs
         const tabBtn = e.target.closest('#size-tabs .tab-btn');
         if (tabBtn) {
@@ -131,14 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 c.classList.toggle('active', c.id === `tab-${tabBtn.dataset.tab}`);
             });
             return;
-        }
-
-        // Portfolio Item WA Order Button
-        const itemBtn = e.target.closest('.btn-order-item');
-        if (itemBtn) {
-            e.stopPropagation();
-            const { product, category } = itemBtn.dataset;
-            openWA(`Halo Prima Nusa Sport, saya tertarik dengan sampel *${product}* (Kategori: ${category}) dari website. Saya ingin berkonsultasi untuk kustomisasi desain tim.`);
         }
     });
 
