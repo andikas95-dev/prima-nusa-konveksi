@@ -20,6 +20,63 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(s => observer.observe(s));
     }
 
+    /* 1b. Scroll Motion Reveal Animations (Fallback Observer) */
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window && revealElements.length) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-active');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -50px 0px', threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+    }
+
+    /* 1c. Framer Motion (Motion for Web Engine) Integrations */
+    if (window.Motion && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const { animate, inView, stagger } = window.Motion;
+        const cinematicEase = [0.22, 1, 0.36, 1]; // Ultra-smooth deceleration curve
+
+        // Hero Section Choreography (Gentle, Luxurious Entrance)
+        animate('.hero-badge-wrap', { opacity: [0, 1], y: [-20, 0] }, { duration: 0.9, easing: cinematicEase });
+        animate('.hero-title .title-outline', { opacity: [0, 1], y: [45, 0] }, { duration: 1.1, delay: 0.15, easing: cinematicEase });
+        animate('.hero-title .title-highlight', { opacity: [0, 1], y: [45, 0] }, { duration: 1.1, delay: 0.3, easing: cinematicEase });
+        animate('.hero-subtitle', { opacity: [0, 1], y: [25, 0] }, { duration: 0.9, delay: 0.45, easing: cinematicEase });
+        animate('.pill-item', { opacity: [0, 1], scale: [0.92, 1] }, { delay: stagger(0.12, { start: 0.6 }), duration: 0.7, easing: cinematicEase });
+        animate('.hero-buttons', { opacity: [0, 1], y: [25, 0] }, { duration: 0.9, delay: 0.85, easing: cinematicEase });
+        animate('.stat-item', { opacity: [0, 1], y: [25, 0] }, { delay: stagger(0.15, { start: 1.0 }), duration: 0.7, easing: cinematicEase });
+
+        // Scroll-Driven InView Stagger Choreography (Smoother & Slower)
+        inView('.specs-grid', ({ target }) => {
+            animate(target.querySelectorAll('.spec-card'), { opacity: [0, 1], y: [40, 0], scale: [0.96, 1] }, { delay: stagger(0.18), duration: 1.0, easing: cinematicEase });
+        });
+
+        inView('.portfolio-grid', ({ target }) => {
+            animate(target.querySelectorAll('.portfolio-item'), { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.15), duration: 0.95, easing: cinematicEase });
+        });
+
+        inView('.roadmap-timeline', ({ target }) => {
+            animate(target.querySelectorAll('.timeline-step'), { opacity: [0, 1], y: [45, 0] }, { delay: stagger(0.2), duration: 1.0, easing: cinematicEase });
+        });
+
+        inView('.size-chart-wrapper', ({ target }) => {
+            animate(target, { opacity: [0, 1], y: [35, 0] }, { duration: 1.05, easing: cinematicEase });
+        });
+
+        inView('.testi-slider-wrapper', ({ target }) => {
+            animate(target, { opacity: [0, 1], scale: [0.96, 1] }, { duration: 1.0, easing: cinematicEase });
+        });
+
+        inView('.quick-order-card', ({ target }) => {
+            animate(target, { opacity: [0, 1], y: [40, 0], scale: [0.97, 1] }, { duration: 1.1, easing: cinematicEase });
+        });
+    }
+
+
+
+
     /* 2. Mobile Menu Toggle */
     const mobileBtn = document.getElementById('mobile-menu-btn');
     const mobileNav = document.getElementById('mobile-nav-overlay');
