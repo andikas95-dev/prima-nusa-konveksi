@@ -509,23 +509,58 @@
 
                 <!-- Filter Buttons -->
                 <div class="portfolio-filters reveal-on-scroll delay-1" id="portfolio-filters">
-                    <button class="filter-btn active" data-filter="all">Semua Produk</button>
-                    <button class="filter-btn" data-filter="futsal">Futsal / Sepak Bola</button>
-                    <button class="filter-btn" data-filter="esports">E-Sports</button>
-                    <button class="filter-btn" data-filter="running">Running & Cycling</button>
-                    <button class="filter-btn" data-filter="tracksuit">Tracksuit & Hoodie</button>
+                    <button class="filter-btn active" data-filter="all">Semua Desain</button>
+                    <button class="filter-btn" data-filter="futsal">Sepak Bola &amp; Futsal</button>
+                    <button class="filter-btn" data-filter="kiper">Kiper / Goalkeeper</button>
+                    <button class="filter-btn" data-filter="mannequin">3D Mannequin Pro</button>
+                    <button class="filter-btn" data-filter="batik">Seri Batik &amp; Etnik</button>
+                    <button class="filter-btn" data-filter="multisport">Basket &amp; Multi-Sport</button>
                 </div>
 
-                <!-- Portfolio Grid -->
-                <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Portfolio Carousel Controls & Toolbar -->
+                <div class="portfolio-toolbar reveal-on-scroll delay-1">
+                    <div class="portfolio-controls" id="portfolio-controls">
+                        <button class="slider-btn" id="portfolio-prev" type="button" aria-label="Desain Jersey Sebelumnya">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+                        <button class="slider-btn" id="portfolio-next" type="button" aria-label="Desain Jersey Selanjutnya">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
 
-                    <!-- Item 1: Futsal -->
+                    <div class="portfolio-view-switch">
+                        <button class="view-switch-btn active" id="btn-view-slider" type="button" aria-label="Mode Slider / Carousel" title="Mode Slider">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                <line x1="8" y1="5" x2="8" y2="19"></line>
+                                <line x1="16" y1="5" x2="16" y2="19"></line>
+                            </svg>
+                            <span>Slider</span>
+                        </button>
+                        <button class="view-switch-btn" id="btn-view-grid" type="button" aria-label="Mode Grid Galeri" title="Mode Grid">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span>Grid</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Slider Wrapper -->
+                <div class="portfolio-slider-wrapper">
+                    <!-- Portfolio Grid / Track (Slider mode by default) -->
+                    <div class="portfolio-grid portfolio-carousel-track" id="portfolio-grid">
+
+                    <!-- Item 1: Futsal Championship D-60 -->
                     <div class="portfolio-item reveal-on-scroll delay-1" data-category="futsal" tabindex="0"
-                        role="button" aria-label="Lihat preview Jersey Soccer Championship Edition"
-                        data-title="Jersey Soccer Championship Edition" data-category-name="Sepak Bola / Futsal"
-                        data-tag="Official Matchday" data-fabric="Dryfit Premium Milano (CoolMax Tech)"
-                        data-print="Full Sublimation High-Res 4K" data-leadtime="7-10 Hari Kerja"
-                        data-img="assets/img/jersey-futsal-1.jpg">
+                        role="button" aria-label="Lihat preview Jersey Soccer Championship D-60"
+                        data-title="Jersey Soccer Championship D-60" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Official Matchday" data-fabric="Dryfit Milano Premium (CoolMax Tech)"
+                        data-print="Full Sublimation High-Res 4K Japanese Ink" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-60.webp">
                         <div class="portfolio-img-box">
                             <span class="item-tag-badge">Official Matchday</span>
                             <span class="hover-zoom-pill">
@@ -536,20 +571,20 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-futsal-1.jpg" alt="Jersey Soccer Championship Prima Nusa Sport"
-                                loading="lazy" decoding="async">
+                            <img src="assets/img/products/portofolio/D-60.webp"
+                                alt="Jersey Soccer Championship D-60 Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jersey Soccer Championship Edition</h4>
-                                <p class="category-label">Sepak Bola / Futsal</p>
+                                <h4>Jersey Soccer Championship D-60</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jersey Soccer Championship Edition"
-                                        data-category="Futsal / Sepak Bola">
+                                        data-product="Jersey Soccer Championship D-60"
+                                        data-category="Sepak Bola &amp; Futsal">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -557,14 +592,15 @@
                         </div>
                     </div>
 
-                    <!-- Item 2: Esports -->
-                    <div class="portfolio-item reveal-on-scroll delay-2" data-category="esports" tabindex="0"
-                        role="button" aria-label="Lihat preview Jersey Borneo Esports Pro"
-                        data-title="Jersey Borneo Esports Pro" data-category-name="E-Sports" data-tag="Pro Gaming Wear"
-                        data-fabric="Dryfit Microdot Ultra-Soft" data-print="High Precision Sublimation 4K"
-                        data-leadtime="5-7 Hari Kerja" data-img="assets/img/jersey-esports-1.jpg">
+                    <!-- Item 2: 3D Mannequin Championship Blue -->
+                    <div class="portfolio-item reveal-on-scroll delay-2" data-category="mannequin" tabindex="0"
+                        role="button" aria-label="Lihat preview Set 3D Mannequin Championship Blue"
+                        data-title="Set 3D Mannequin Championship Blue" data-category-name="3D Mannequin Pro"
+                        data-tag="Full Set 3D Pro" data-fabric="Dryfit Benzema & Microdot Interlock"
+                        data-print="Sublimasi 4K Ultra-Vivid Presisi" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/1.webp">
                         <div class="portfolio-img-box">
-                            <span class="item-tag-badge">Pro Gaming Wear</span>
+                            <span class="item-tag-badge">Full Set 3D Pro</span>
                             <span class="hover-zoom-pill">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -573,19 +609,20 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-esports-1.jpg" alt="Jersey Borneo Esports Pro" loading="lazy"
-                                decoding="async">
+                            <img src="assets/img/products/portofolio/1.webp"
+                                alt="Set 3D Mannequin Championship Blue Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jersey Borneo Esports Pro</h4>
-                                <p class="category-label">E-Sports</p>
+                                <h4>Set 3D Mannequin Championship</h4>
+                                <p class="category-label">3D Mannequin Pro</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jersey Borneo Esports Pro" data-category="E-Sports">
+                                        data-product="Set 3D Mannequin Championship Blue"
+                                        data-category="3D Mannequin Pro">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -593,15 +630,15 @@
                         </div>
                     </div>
 
-                    <!-- Item 3: Running -->
-                    <div class="portfolio-item reveal-on-scroll delay-3" data-category="running" tabindex="0"
-                        role="button" aria-label="Lihat preview Jersey Singlet Samarinda Runners"
-                        data-title="Jersey Singlet Samarinda Runners" data-category-name="Running & Cycling"
-                        data-tag="Ultralight Series" data-fabric="Dryfit Featherweight Breathable"
-                        data-print="Reflective Accent & Sublimation" data-leadtime="5-7 Hari Kerja"
-                        data-img="assets/img/jersey-running-1.jpg">
+                    <!-- Item 3: Kiper Volt Neon D-61 -->
+                    <div class="portfolio-item reveal-on-scroll delay-3" data-category="kiper" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Kiper D-61 Volt Neon"
+                        data-title="Jersey Kiper D-61 Volt Neon" data-category-name="Kiper / Goalkeeper"
+                        data-tag="High-Visibility GK" data-fabric="Dryfit Hexagon Breathable Padded"
+                        data-print="Full Sublimation Fluor-Tone High-Res" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-61 KIPER.webp">
                         <div class="portfolio-img-box">
-                            <span class="item-tag-badge">Ultralight Series</span>
+                            <span class="item-tag-badge">High-Visibility GK</span>
                             <span class="hover-zoom-pill">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -610,20 +647,19 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-running-1.jpg" alt="Jersey Singlet Samarinda Runners"
-                                loading="lazy" decoding="async">
+                            <img src="assets/img/products/portofolio/D-61 KIPER.webp"
+                                alt="Jersey Kiper D-61 Volt Neon Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jersey Singlet Samarinda Runners</h4>
-                                <p class="category-label">Running & Cycling</p>
+                                <h4>Jersey Kiper D-61 Volt Neon</h4>
+                                <p class="category-label">Kiper / Goalkeeper</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jersey Singlet Samarinda Runners"
-                                        data-category="Running & Cycling">
+                                        data-product="Jersey Kiper D-61 Volt Neon" data-category="Kiper / Goalkeeper">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -631,15 +667,15 @@
                         </div>
                     </div>
 
-                    <!-- Item 4: Tracksuit -->
-                    <div class="portfolio-item reveal-on-scroll delay-4" data-category="tracksuit" tabindex="0"
-                        role="button" aria-label="Lihat preview Jaket Tracksuit Coach Edition"
-                        data-title="Jaket Tracksuit Coach Edition" data-category-name="Tracksuit & Hoodie"
-                        data-tag="Coach Outerwear" data-fabric="Poly-Taslan Waterproof & Mesh Inner"
-                        data-print="Rubber Patch & High Embroidery" data-leadtime="10-14 Hari Kerja"
-                        data-img="assets/img/jersey-tracksuit-1.jpg">
+                    <!-- Item 4: Batik Nusantara Gold & Black -->
+                    <div class="portfolio-item reveal-on-scroll delay-4" data-category="batik" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Batik Nusantara Gold & Black"
+                        data-title="Jersey Batik Nusantara Gold & Black" data-category-name="Seri Batik & Etnik"
+                        data-tag="Batik Nusantara" data-fabric="Dryfit Polimesh Soft Touch Anti-Bacterial"
+                        data-print="Etnik Sublimation Gold Gradient 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-50.webp">
                         <div class="portfolio-img-box">
-                            <span class="item-tag-badge">Coach Outerwear</span>
+                            <span class="item-tag-badge">Batik Nusantara</span>
                             <span class="hover-zoom-pill">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -648,19 +684,20 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-tracksuit-1.jpg" alt="Jaket Tracksuit Borneo FC" loading="lazy"
-                                decoding="async">
+                            <img src="assets/img/products/portofolio/Untitled-50.webp"
+                                alt="Jersey Batik Nusantara Gold Black Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jaket Tracksuit Coach Edition</h4>
-                                <p class="category-label">Tracksuit & Hoodie</p>
+                                <h4>Jersey Batik Nusantara Gold</h4>
+                                <p class="category-label">Seri Batik &amp; Etnik</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jaket Tracksuit Coach Edition" data-category="Tracksuit & Hoodie">
+                                        data-product="Jersey Batik Nusantara Gold & Black"
+                                        data-category="Seri Batik &amp; Etnik">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -668,15 +705,15 @@
                         </div>
                     </div>
 
-                    <!-- Item 5: Futsal 2 -->
-                    <div class="portfolio-item reveal-on-scroll delay-1" data-category="futsal" tabindex="0"
-                        role="button" aria-label="Lihat preview Jersey Futsal Red Flames"
-                        data-title="Jersey Futsal Red Flames" data-category-name="Sepak Bola / Futsal"
-                        data-tag="Sublimation 4K" data-fabric="Dryfit Zigzag Performance"
-                        data-print="Full Sublimation High-Res 4K" data-leadtime="7-10 Hari Kerja"
-                        data-img="assets/img/jersey-futsal-2.jpg">
+                    <!-- Item 5: Basket Pandan Black & Gold -->
+                    <div class="portfolio-item reveal-on-scroll delay-1" data-category="multisport" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Basket Pandan Black & Gold"
+                        data-title="Jersey Basket Pandan Black & Gold" data-category-name="Basket & Multi-Sport"
+                        data-tag="Pro Basketball" data-fabric="Dryfit Bilabong Double Layer Pro"
+                        data-print="Sublimasi Kombinasi Polyflex Font" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-41.webp">
                         <div class="portfolio-img-box">
-                            <span class="item-tag-badge">Sublimation 4K</span>
+                            <span class="item-tag-badge">Pro Basketball</span>
                             <span class="hover-zoom-pill">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -685,19 +722,20 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-futsal-2.jpg" alt="Jersey Futsal Sublimasi Merah Hitam"
-                                loading="lazy" decoding="async">
+                            <img src="assets/img/products/portofolio/Untitled-41.webp"
+                                alt="Jersey Basket Pandan Black Gold Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jersey Futsal Red Flames</h4>
-                                <p class="category-label">Sepak Bola / Futsal</p>
+                                <h4>Jersey Basket Pandan Black &amp; Gold</h4>
+                                <p class="category-label">Basket &amp; Multi-Sport</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jersey Futsal Red Flames" data-category="Futsal / Sepak Bola">
+                                        data-product="Jersey Basket Pandan Black & Gold"
+                                        data-category="Basket &amp; Multi-Sport">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -705,14 +743,15 @@
                         </div>
                     </div>
 
-                    <!-- Item 6: Esports 2 -->
-                    <div class="portfolio-item reveal-on-scroll delay-2" data-category="esports" tabindex="0"
-                        role="button" aria-label="Lihat preview Jersey Esports Cyber Gold"
-                        data-title="Jersey Esports Cyber Gold" data-category-name="E-Sports" data-tag="Cyber Pro"
-                        data-fabric="Dryfit Hexagon Mesh Premium" data-print="Metallic-Gold Sublimation FX"
-                        data-leadtime="5-7 Hari Kerja" data-img="assets/img/jersey-esports-2.jpg">
+                    <!-- Item 6: Futsal Retro Pinstripe Maroon D-63 -->
+                    <div class="portfolio-item reveal-on-scroll delay-2" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Retro Pinstripe Maroon D-63"
+                        data-title="Jersey Retro Pinstripe Maroon D-63" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Heritage Classic" data-fabric="Dryfit Milano Vintage Feel Anti-UV"
+                        data-print="Sublimasi Garis Presisi 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-63.webp">
                         <div class="portfolio-img-box">
-                            <span class="item-tag-badge">Cyber Pro</span>
+                            <span class="item-tag-badge">Heritage Classic</span>
                             <span class="hover-zoom-pill">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2.5">
@@ -721,19 +760,20 @@
                                     <line x1="11" y1="8" x2="11" y2="14"></line>
                                     <line x1="8" y1="11" x2="14" y2="11"></line>
                                 </svg>
-                                Zoom & Detail
+                                Zoom &amp; Detail
                             </span>
-                            <img src="assets/img/jersey-esports-2.jpg" alt="Jersey Cyber Arena Gaming" loading="lazy"
-                                decoding="async">
+                            <img src="assets/img/products/portofolio/D-63.webp"
+                                alt="Jersey Retro Pinstripe Maroon D-63 Prima Nusa Sport" loading="lazy" decoding="async">
                             <div class="portfolio-overlay">
-                                <h4>Jersey Esports Cyber Gold</h4>
-                                <p class="category-label">E-Sports</p>
+                                <h4>Jersey Retro Pinstripe Maroon D-63</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
                                 <div class="portfolio-card-actions">
                                     <button class="btn btn-outline btn-preview-item" type="button">
                                         <span>Preview Detail</span>
                                     </button>
                                     <button class="btn btn-red btn-order-item" type="button"
-                                        data-product="Jersey Esports Cyber Gold" data-category="E-Sports">
+                                        data-product="Jersey Retro Pinstripe Maroon D-63"
+                                        data-category="Sepak Bola &amp; Futsal">
                                         <span>Order WA</span>
                                     </button>
                                 </div>
@@ -741,6 +781,705 @@
                         </div>
                     </div>
 
+                    <!-- Item 7: 3D Mannequin Black & Red Flame -->
+                    <div class="portfolio-item reveal-on-scroll delay-3" data-category="mannequin" tabindex="0"
+                        role="button" aria-label="Lihat preview Set 3D Mannequin Black & Red Flame"
+                        data-title="Set 3D Mannequin Black & Red Flame" data-category-name="3D Mannequin Pro"
+                        data-tag="Full Set 3D Pro" data-fabric="Dryfit Milano Cool-Dry Performance"
+                        data-print="Sublimasi Gradasi Api Tajam 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/4.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Full Set 3D Pro</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/4.webp"
+                                alt="Set 3D Mannequin Black Red Flame Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Set 3D Mannequin Red Flame</h4>
+                                <p class="category-label">3D Mannequin Pro</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Set 3D Mannequin Black & Red Flame"
+                                        data-category="3D Mannequin Pro">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 8: Kiper Monochrome White D-60 -->
+                    <div class="portfolio-item reveal-on-scroll delay-4" data-category="kiper" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Kiper D-60 Monochrome White"
+                        data-title="Jersey Kiper D-60 Monochrome White" data-category-name="Kiper / Goalkeeper"
+                        data-tag="Pro Goalkeeper" data-fabric="Dryfit Jarum Super Soft + Busa Siku"
+                        data-print="Full Sublimation High-Res Kontras" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-60 KIPER.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Pro Goalkeeper</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-60 KIPER.webp"
+                                alt="Jersey Kiper D-60 Monochrome Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Kiper D-60 Monochrome</h4>
+                                <p class="category-label">Kiper / Goalkeeper</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Kiper D-60 Monochrome White"
+                                        data-category="Kiper / Goalkeeper">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 9: Batik Megamendung Purple Dakzz FC -->
+                    <div class="portfolio-item reveal-on-scroll delay-1" data-category="batik" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Dakzz FC Megamendung Purple"
+                        data-title="Jersey Dakzz FC Megamendung Purple" data-category-name="Seri Batik & Etnik"
+                        data-tag="Etnik Megamendung" data-fabric="Dryfit Waffle Premium Quick-Drying"
+                        data-print="Sublimasi Motif Ombak Halus 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-12.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Etnik Megamendung</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-12.webp"
+                                alt="Jersey Dakzz FC Megamendung Purple Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Dakzz FC Megamendung</h4>
+                                <p class="category-label">Seri Batik &amp; Etnik</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Dakzz FC Megamendung Purple"
+                                        data-category="Seri Batik &amp; Etnik">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 10: Voli Pouk Graha Prima -->
+                    <div class="portfolio-item reveal-on-scroll delay-2" data-category="multisport" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Voli Pouk Graha Prima"
+                        data-title="Jersey Voli Pouk Graha Prima" data-category-name="Basket & Multi-Sport"
+                        data-tag="Volley Pro" data-fabric="Dryfit Spandex Elastic Pro-Fit"
+                        data-print="Full Sublimation Vivid Colors" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-30.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Volley Pro</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-30.webp"
+                                alt="Jersey Voli Pouk Graha Prima Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Voli Pouk Graha Prima</h4>
+                                <p class="category-label">Basket &amp; Multi-Sport</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Voli Pouk Graha Prima"
+                                        data-category="Basket &amp; Multi-Sport">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 11: Cyber Circuit Pro D-61 -->
+                    <div class="portfolio-item reveal-on-scroll delay-3" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Cyber Circuit Pro D-61"
+                        data-title="Jersey Cyber Circuit Pro D-61" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Cyber Pro Series" data-fabric="Dryfit Microdot Ultra-Soft"
+                        data-print="Sublimasi Circuit Neon 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-61.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Cyber Pro Series</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-61.webp"
+                                alt="Jersey Cyber Circuit Pro D-61 Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Cyber Circuit Pro D-61</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Cyber Circuit Pro D-61"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 12: Stealth Monochrome D-68 -->
+                    <div class="portfolio-item reveal-on-scroll delay-4" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Stealth Monochrome D-68"
+                        data-title="Jersey Stealth Monochrome D-68" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Minimalist Dark" data-fabric="Dryfit Milano Deep Black Anti-Odor"
+                        data-print="High-Density Monokrom Sublimasi" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-68.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Minimalist Dark</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-68.webp"
+                                alt="Jersey Stealth Monochrome D-68 Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Stealth Monochrome D-68</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Stealth Monochrome D-68"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 13 (Batch 2): 3D Mannequin Honeycomb Navy -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="mannequin" tabindex="0"
+                        role="button" aria-label="Lihat preview Set 3D Mannequin Honeycomb Navy"
+                        data-title="Set 3D Mannequin Honeycomb Navy" data-category-name="3D Mannequin Pro"
+                        data-tag="Full Set 3D Pro" data-fabric="Dryfit Hexagon Mesh Premium"
+                        data-print="Full Sublimation Deep Navy 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/5.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Full Set 3D Pro</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/5.webp"
+                                alt="Set 3D Mannequin Honeycomb Navy Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Set 3D Mannequin Honeycomb Navy</h4>
+                                <p class="category-label">3D Mannequin Pro</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Set 3D Mannequin Honeycomb Navy"
+                                        data-category="3D Mannequin Pro">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 14 (Batch 2): Kiper Sun Orange D-63 -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="kiper" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Kiper D-63 Sun Orange"
+                        data-title="Jersey Kiper D-63 Sun Orange" data-category-name="Kiper / Goalkeeper"
+                        data-tag="Dynamic GK" data-fabric="Dryfit Jarum Padded Elbow Protection"
+                        data-print="Sublimasi Oranye Menyala High-Res" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-63 KIPER.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Dynamic GK</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-63 KIPER.webp"
+                                alt="Jersey Kiper D-63 Sun Orange Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Kiper D-63 Sun Orange</h4>
+                                <p class="category-label">Kiper / Goalkeeper</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Kiper D-63 Sun Orange"
+                                        data-category="Kiper / Goalkeeper">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 15 (Batch 2): Etnik Dayak D-62 Emerald -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="batik" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey D-62 Dayak Pattern Emerald"
+                        data-title="Jersey D-62 Dayak Pattern Emerald" data-category-name="Seri Batik & Etnik"
+                        data-tag="Dayak Heritage" data-fabric="Dryfit Polimesh Breathable"
+                        data-print="Etnik Borneo Sublimation 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-62.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Dayak Heritage</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-62.webp"
+                                alt="Jersey D-62 Dayak Pattern Emerald Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey D-62 Dayak Pattern Emerald</h4>
+                                <p class="category-label">Seri Batik &amp; Etnik</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey D-62 Dayak Pattern Emerald"
+                                        data-category="Seri Batik &amp; Etnik">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 16 (Batch 2): Basket Your Team Crimson -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="multisport" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Basket Your Team Crimson"
+                        data-title="Jersey Basket Your Team Crimson" data-category-name="Basket & Multi-Sport"
+                        data-tag="Basketball Kit" data-fabric="Dryfit Bintik Porous Athletic Fit"
+                        data-print="Sublimasi Kontras Nomor Dada & Punggung" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-40.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Basketball Kit</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-40.webp"
+                                alt="Jersey Basket Your Team Crimson Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Basket Your Team Crimson</h4>
+                                <p class="category-label">Basket &amp; Multi-Sport</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Basket Your Team Crimson"
+                                        data-category="Basket &amp; Multi-Sport">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 17 (Batch 2): Arbus FC Gold Luxury Stripes -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Arbus FC Gold Luxury Stripes"
+                        data-title="Jersey Arbus FC Gold Luxury Stripes" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Official Club" data-fabric="Dryfit Milano Gold Accents"
+                        data-print="Full Sublimasi Garis Klasik & Emblem 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-20.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Official Club</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-20.webp"
+                                alt="Jersey Arbus FC Gold Stripes Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Arbus FC Gold Luxury</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Arbus FC Gold Luxury Stripes"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 18 (Batch 2): Four S Legend Anime Edition -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Four S Legend Anime Edition"
+                        data-title="Jersey Four S Legend Anime Edition" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Custom Anime" data-fabric="Dryfit Benzema High Elasticity"
+                        data-print="Sublimasi Karakter Grafis Halus 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/asdasdsa.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Custom Anime</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/asdasdsa.webp"
+                                alt="Jersey Four S Legend Anime Edition Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Four S Legend Anime</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Four S Legend Anime Edition"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 19 (Batch 2): 3D Mannequin Zigzag White-Pink -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="mannequin" tabindex="0"
+                        role="button" aria-label="Lihat preview Set 3D Mannequin Zigzag White-Pink"
+                        data-title="Set 3D Mannequin Zigzag White-Pink" data-category-name="3D Mannequin Pro"
+                        data-tag="Full Set 3D Pro" data-fabric="Dryfit Microdot Ultra Light"
+                        data-print="Sublimasi Gradasi Zigzag Modern" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/2.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Full Set 3D Pro</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/2.webp"
+                                alt="Set 3D Mannequin Zigzag White Pink Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Set 3D Mannequin Zigzag Pink</h4>
+                                <p class="category-label">3D Mannequin Pro</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Set 3D Mannequin Zigzag White-Pink"
+                                        data-category="3D Mannequin Pro">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 20 (Batch 2): Kiper Cyan Electric D-62 -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="kiper" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Kiper D-62 Cyan Electric"
+                        data-title="Jersey Kiper D-62 Cyan Electric" data-category-name="Kiper / Goalkeeper"
+                        data-tag="Acrobatic GK" data-fabric="Dryfit Waffle Shock Absorb Protection"
+                        data-print="Sublimasi Biru Elektrik Fluor 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/D-62 KIPER.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Acrobatic GK</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/D-62 KIPER.webp"
+                                alt="Jersey Kiper D-62 Cyan Electric Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Kiper D-62 Cyan Electric</h4>
+                                <p class="category-label">Kiper / Goalkeeper</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Kiper D-62 Cyan Electric"
+                                        data-category="Kiper / Goalkeeper">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 21 (Batch 2): Singa Hitam Kantanan -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Singa Hitam Kantanan"
+                        data-title="Jersey Singa Hitam Kantanan" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Mascot Series" data-fabric="Dryfit Milano Heavy Duty"
+                        data-print="Sublimasi Maskot Singa Detail 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-2.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Mascot Series</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-2.webp"
+                                alt="Jersey Singa Hitam Kantanan Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Singa Hitam Kantanan</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Singa Hitam Kantanan"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 22 (Batch 2): My Futsal Retro Lace Collar -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="futsal" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey My Futsal Retro Lace Collar"
+                        data-title="Jersey My Futsal Retro Lace Collar" data-category-name="Sepak Bola & Futsal"
+                        data-tag="Retro Lace Edition" data-fabric="Dryfit Polimesh Vintage Feel"
+                        data-print="Sublimasi Geometrik Diamond 4K" data-leadtime="7-10 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-31.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Retro Lace Edition</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-31.webp"
+                                alt="Jersey My Futsal Retro Lace Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey My Futsal Retro Lace</h4>
+                                <p class="category-label">Sepak Bola &amp; Futsal</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey My Futsal Retro Lace Collar"
+                                        data-category="Sepak Bola &amp; Futsal">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 23 (Batch 2): Badminton & Training Active -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="multisport" tabindex="0"
+                        role="button" aria-label="Lihat preview Jersey Badminton & Training Active"
+                        data-title="Jersey Badminton & Training Active" data-category-name="Basket & Multi-Sport"
+                        data-tag="Racket Sports" data-fabric="Dryfit Featherweight Ultra Breathable"
+                        data-print="Sublimasi Sport Aerodinamis 4K" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/Untitled-75.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Racket Sports</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/Untitled-75.webp"
+                                alt="Jersey Badminton Training Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Jersey Badminton Active Pro</h4>
+                                <p class="category-label">Basket &amp; Multi-Sport</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Jersey Badminton & Training Active"
+                                        data-category="Basket &amp; Multi-Sport">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 24 (Batch 2): Kaos Event Family Gathering Sublim -->
+                    <div class="portfolio-item portfolio-extra hide-initial" data-category="multisport" tabindex="0"
+                        role="button" aria-label="Lihat preview Kaos Event Family Gathering Sublim"
+                        data-title="Kaos Event Family Gathering Sublim" data-category-name="Basket & Multi-Sport"
+                        data-tag="Event & Community" data-fabric="Dryfit Milano / PE Soft Handfeel"
+                        data-print="Full Sublimation Foto & Tipografi Penuh" data-leadtime="5-7 Hari Kerja"
+                        data-img="assets/img/products/portofolio/desain kaos family gheatring.webp">
+                        <div class="portfolio-img-box">
+                            <span class="item-tag-badge">Event & Community</span>
+                            <span class="hover-zoom-pill">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                                </svg>
+                                Zoom &amp; Detail
+                            </span>
+                            <img src="assets/img/products/portofolio/desain kaos family gheatring.webp"
+                                alt="Kaos Event Family Gathering Prima Nusa Sport" loading="lazy" decoding="async">
+                            <div class="portfolio-overlay">
+                                <h4>Kaos Event Family Gathering</h4>
+                                <p class="category-label">Basket &amp; Multi-Sport</p>
+                                <div class="portfolio-card-actions">
+                                    <button class="btn btn-outline btn-preview-item" type="button">
+                                        <span>Preview Detail</span>
+                                    </button>
+                                    <button class="btn btn-red btn-order-item" type="button"
+                                        data-product="Kaos Event Family Gathering Sublim"
+                                        data-category="Basket &amp; Multi-Sport">
+                                        <span>Order WA</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+
+                <!-- Load More / Full Portfolio Action -->
+                <div class="portfolio-more-wrap text-center reveal-on-scroll delay-2" id="portfolio-more-wrap">
+                    <button class="btn btn-outline btn-large" id="btn-load-more-portfolio" type="button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Tampilkan Lebih Banyak Portofolio (+12 Desain)</span>
+                    </button>
                 </div>
 
             </div>

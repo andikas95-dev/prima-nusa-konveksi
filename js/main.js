@@ -118,9 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentVisibleItems = [];
     let currentLightboxIdx = 0;
     let lastFocusedElement = null;
+    let portfolioExpanded = false;
+    let isPortfolioDragging = false;
+    let updatePortfolioArrows = null;
+    const portfolioTrack = document.getElementById('portfolio-grid');
 
     function getVisibleItems() {
-        return Array.from(document.querySelectorAll('.portfolio-item:not(.hide), .collar-card'));
+        return Array.from(document.querySelectorAll('.portfolio-item:not(.hide):not(.hide-initial), .collar-card'));
     }
 
     function renderLightboxItem(index) {
@@ -252,10 +256,55 @@ document.addEventListener('DOMContentLoaded', () => {
             filterContainer?.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             filterBtn.classList.add('active');
             const cat = filterBtn.dataset.filter;
+            const loadMoreWrap = document.getElementById('portfolio-more-wrap');
+            const isCarousel = portfolioTrack?.classList.contains('portfolio-carousel-track');
+
             document.querySelectorAll('#portfolio-grid .portfolio-item').forEach(item => {
-                const show = cat === 'all' || item.dataset.category === cat;
-                item.classList.toggle('hide', !show);
+                if (cat === 'all') {
+                    if (isCarousel) {
+                        item.classList.remove('hide', 'hide-initial');
+                    } else {
+                        const isExtra = item.classList.contains('portfolio-extra');
+                        if (portfolioExpanded || !isExtra) {
+                            item.classList.remove('hide', 'hide-initial');
+                        } else {
+                            item.classList.add('hide-initial');
+                            item.classList.remove('hide');
+                        }
+                    }
+                } else {
+                    const matches = item.dataset.category === cat;
+                    item.classList.toggle('hide', !matches);
+                    if (matches) {
+                        item.classList.remove('hide-initial');
+                    }
+                }
             });
+
+            if (isCarousel) {
+                portfolioTrack?.scrollTo({ left: 0, behavior: 'smooth' });
+                if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+            } else if (loadMoreWrap) {
+                loadMoreWrap.style.display = (cat === 'all' && !portfolioExpanded) ? 'flex' : 'none';
+            }
+
+            if (typeof updatePortfolioArrows === 'function') {
+                setTimeout(updatePortfolioArrows, 120);
+            }
+            return;
+        }
+
+        // Load More Portfolio Button
+        const loadMoreBtn = e.target.closest('#btn-load-more-portfolio');
+        if (loadMoreBtn) {
+            portfolioExpanded = true;
+            document.querySelectorAll('#portfolio-grid .portfolio-extra').forEach(item => {
+                item.classList.remove('hide-initial', 'hide');
+            });
+            const loadMoreWrap = document.getElementById('portfolio-more-wrap');
+            if (loadMoreWrap) {
+                loadMoreWrap.style.display = 'none';
+            }
             return;
         }
 
@@ -271,6 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Portfolio / Collar Item Click Trigger (Opens Lightbox Preview)
         const itemCard = e.target.closest('.portfolio-item, .collar-card');
         if (itemCard) {
+            if (isPortfolioDragging) return; // Prevent opening lightbox if user was dragging
             openLightboxByElement(itemCard);
             return;
         }
@@ -375,6 +425,135 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
+    }
+
+    /* 4c. Portfolio Jersey Custom Carousel Slider */
+    const portfolioPrev = document.getElementById('portfolio-prev');
+    const portfolioNext = document.getElementById('portfolio-next');
+    const portfolioControls = document.getElementById('portfolio-controls');
+    const btnViewSlider = document.getElementById('btn-view-slider');
+    const btnViewGrid = document.getElementById('btn-view-grid');
+
+    if (portfolioTrack) {
+        // Initial setup for carousel: reveal all cards in track
+        document.querySelectorAll('#portfolio-grid .portfolio-item').forEach(item => {
+            item.classList.remove('hide-initial');
+        });
+
+        updatePortfolioArrows = function() {
+            if (!portfolioTrack || !portfolioTrack.classList.contains('portfolio-carousel-track')) return;
+
+            const scrollPos = portfolioTrack.scrollLeft;
+            const maxScrollLeft = portfolioTrack.scrollWidth - portfolioTrack.clientWidth;
+
+            if (portfolioPrev) {
+                portfolioPrev.disabled = scrollPos <= 10;
+            }
+            if (portfolioNext) {
+                portfolioNext.disabled = scrollPos >= maxScrollLeft - 10;
+            }
+        };
+
+        let isPortfolioScrollTicking = false;
+        portfolioTrack.addEventListener('scroll', () => {
+            if (!isPortfolioScrollTicking) {
+                window.requestAnimationFrame(() => {
+                    updatePortfolioArrows();
+                    isPortfolioScrollTicking = false;
+                });
+                isPortfolioScrollTicking = true;
+            }
+        }, { passive: true });
+
+        portfolioPrev?.addEventListener('click', () => {
+            const firstCard = portfolioTrack.querySelector('.portfolio-item:not(.hide)');
+            if (!firstCard) return;
+            const cardWidth = firstCard.offsetWidth + 24;
+            portfolioTrack.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        portfolioNext?.addEventListener('click', () => {
+            const firstCard = portfolioTrack.querySelector('.portfolio-item:not(.hide)');
+            if (!firstCard) return;
+            const cardWidth = firstCard.offsetWidth + 24;
+            portfolioTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        // Mouse Drag-to-Scroll support on desktop
+        let isPortfolioDown = false;
+        let portfolioStartX = 0;
+        let portfolioScrollStart = 0;
+
+        portfolioTrack.addEventListener('mousedown', (e) => {
+            if (!portfolioTrack.classList.contains('portfolio-carousel-track')) return;
+            if (e.target.closest('button, a')) return;
+            isPortfolioDown = true;
+            isPortfolioDragging = false;
+            portfolioStartX = e.pageX - portfolioTrack.offsetLeft;
+            portfolioScrollStart = portfolioTrack.scrollLeft;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (!isPortfolioDown) return;
+            isPortfolioDown = false;
+            portfolioTrack.classList.remove('is-dragging');
+            setTimeout(() => {
+                isPortfolioDragging = false;
+            }, 60);
+        });
+
+        portfolioTrack.addEventListener('mousemove', (e) => {
+            if (!isPortfolioDown || !portfolioTrack.classList.contains('portfolio-carousel-track')) return;
+            const x = e.pageX - portfolioTrack.offsetLeft;
+            const walk = x - portfolioStartX;
+            if (Math.abs(walk) > 6) {
+                isPortfolioDragging = true;
+                portfolioTrack.classList.add('is-dragging');
+                portfolioTrack.scrollLeft = portfolioScrollStart - walk;
+            }
+        });
+
+        // View Mode Switcher
+        btnViewSlider?.addEventListener('click', () => {
+            btnViewSlider.classList.add('active');
+            btnViewGrid?.classList.remove('active');
+            portfolioTrack.classList.remove('is-grid-view');
+            portfolioTrack.classList.add('portfolio-carousel-track');
+            if (portfolioControls) portfolioControls.style.display = 'inline-flex';
+            const loadMoreWrap = document.getElementById('portfolio-more-wrap');
+            if (loadMoreWrap) loadMoreWrap.style.display = 'none';
+
+            const activeCat = document.querySelector('#portfolio-filters .filter-btn.active')?.dataset.filter || 'all';
+            document.querySelectorAll('#portfolio-grid .portfolio-item').forEach(item => {
+                if (activeCat === 'all' || item.dataset.category === activeCat) {
+                    item.classList.remove('hide-initial', 'hide');
+                }
+            });
+
+            portfolioTrack.scrollTo({ left: 0, behavior: 'smooth' });
+            setTimeout(updatePortfolioArrows, 100);
+        });
+
+        btnViewGrid?.addEventListener('click', () => {
+            btnViewGrid.classList.add('active');
+            btnViewSlider?.classList.remove('active');
+            portfolioTrack.classList.remove('portfolio-carousel-track');
+            portfolioTrack.classList.add('is-grid-view');
+            if (portfolioControls) portfolioControls.style.display = 'none';
+            const loadMoreWrap = document.getElementById('portfolio-more-wrap');
+            const activeCat = document.querySelector('#portfolio-filters .filter-btn.active')?.dataset.filter || 'all';
+            if (loadMoreWrap) {
+                loadMoreWrap.style.display = (activeCat === 'all' && !portfolioExpanded) ? 'flex' : 'none';
+            }
+            if (!portfolioExpanded && activeCat === 'all') {
+                document.querySelectorAll('#portfolio-grid .portfolio-extra').forEach(item => {
+                    item.classList.add('hide-initial');
+                });
+            }
+        });
+
+        // Initialize arrow states
+        updatePortfolioArrows();
     }
 
     /* 5. Quick Order Form Handler */
