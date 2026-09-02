@@ -970,7 +970,7 @@ section {
 
 .specs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
 
@@ -982,6 +982,26 @@ section {
     position: relative;
     overflow: hidden;
     clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 1200px) {
+    .specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .specs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+
+    .spec-card {
+        padding: 2.25rem 1.5rem 1.75rem;
+    }
 }
 
 .spec-card::before {
