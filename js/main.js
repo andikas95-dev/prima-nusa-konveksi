@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const WA_NUMBER = '6281234567890';
+    const WA_NUMBER = '6289693530751';
     const openWA = (msg) => window.open(`https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${encodeURIComponent(msg)}`, '_blank');
 
     /* 1. Header Scroll & Nav Active Highlight */
