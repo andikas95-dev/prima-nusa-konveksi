@@ -386,24 +386,31 @@ img {
 /* Nav Links */
 .main-nav {
     display: flex;
+    align-items: center;
 }
 
 .nav-list {
     display: flex;
+    align-items: center;
     list-style: none;
-    gap: 2.25rem;
+    gap: 1.5rem;
 }
 
 .nav-link {
     font-family: var(--font-heading);
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: var(--color-text-muted);
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.6rem;
     position: relative;
     transition: var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 6px;
+    text-decoration: none;
 }
 
 .nav-link:hover,
@@ -415,17 +422,130 @@ img {
     content: '';
     position: absolute;
     bottom: -2px;
-    left: 0;
+    left: 0.6rem;
+    right: 0.6rem;
     width: 0;
     height: 2px;
     background: linear-gradient(90deg, var(--color-primary), var(--color-primary-dark));
-    box-shadow: 0 0 10px var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
     transition: var(--transition-normal);
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
+    width: calc(100% - 1.2rem);
+}
+
+.dropdown-arrow {
+    transition: transform 0.25s ease, color 0.25s ease;
+    opacity: 0.7;
+}
+
+.nav-item-dropdown {
+    position: relative;
+}
+
+.nav-item-dropdown:hover .dropdown-arrow,
+.nav-item-dropdown:focus-within .dropdown-arrow {
+    transform: rotate(180deg);
+    opacity: 1;
+    color: var(--color-primary);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: rgba(12, 12, 18, 0.96);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 20px rgba(255, 30, 66, 0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 240px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1100;
+}
+
+/* Invisible hover bridge */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
     width: 100%;
+    height: 12px;
+}
+
+.nav-item-dropdown:hover .dropdown-menu,
+.nav-item-dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.dropdown-item:hover,
+.dropdown-item.active {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dropdown-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all var(--transition-fast);
+}
+
+.dropdown-item:hover .dropdown-icon,
+.dropdown-item.active .dropdown-icon {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 30, 66, 0.4);
+}
+
+.dropdown-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-title {
+    font-family: var(--font-heading);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--color-text-white);
+    line-height: 1.25;
+}
+
+.dropdown-desc {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    line-height: 1.25;
+    margin-top: 0.15rem;
 }
 
 .nav-actions {
@@ -2486,6 +2606,14 @@ body.modal-open {
    RESPONSIVE DESIGN (MOBILE & TABLET BREAKPOINTS)
    ========================================================================== */
 @media (max-width: 1024px) {
+    .main-nav {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
     .roadmap-timeline {
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
@@ -2507,14 +2635,6 @@ body.modal-open {
 }
 
 @media (max-width: 768px) {
-    .main-nav {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: flex;
-    }
-
     .hero-title {
         font-size: clamp(2.6rem, 10vw, 4rem);
     }

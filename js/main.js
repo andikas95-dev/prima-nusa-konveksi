@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('.main-header');
     window.addEventListener('scroll', () => header?.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
-    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link, .dropdown-item');
     const sections = document.querySelectorAll('section[id]');
     if ('IntersectionObserver' in window && sections.length) {
         const observer = new IntersectionObserver((entries) => {
@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.isIntersecting) {
                     const hash = `#${entry.target.id}`;
                     navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === hash));
+                    
+                    // Highlight parent dropdown link if a child dropdown-item is active
+                    document.querySelectorAll('.nav-item-dropdown').forEach(dropdown => {
+                        const hasActiveChild = !!dropdown.querySelector('.dropdown-item.active');
+                        dropdown.querySelector('.nav-link.has-dropdown')?.classList.toggle('active', hasActiveChild);
+                    });
                 }
             });
         }, { rootMargin: '-20% 0px -65% 0px' });
