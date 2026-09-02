@@ -50,27 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Scroll-Driven InView Stagger Choreography (Smoother & Slower)
         inView('.specs-grid', ({ target }) => {
-            animate(target.querySelectorAll('.spec-card'), { opacity: [0, 1], y: [40, 0], scale: [0.96, 1] }, { delay: stagger(0.18), duration: 1.0, easing: cinematicEase });
+            if (target) animate(target.querySelectorAll('.spec-card'), { opacity: [0, 1], y: [40, 0], scale: [0.96, 1] }, { delay: stagger(0.18), duration: 1.0, easing: cinematicEase });
         });
 
         inView('.portfolio-grid', ({ target }) => {
-            animate(target.querySelectorAll('.portfolio-item'), { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.15), duration: 0.95, easing: cinematicEase });
+            if (target) animate(target.querySelectorAll('.portfolio-item'), { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.15), duration: 0.95, easing: cinematicEase });
+        });
+
+        inView('.collar-track', ({ target }) => {
+            if (target) animate(target.querySelectorAll('.collar-card'), { opacity: [0, 1], y: [40, 0] }, { delay: stagger(0.12), duration: 0.95, easing: cinematicEase });
         });
 
         inView('.roadmap-timeline', ({ target }) => {
-            animate(target.querySelectorAll('.timeline-step'), { opacity: [0, 1], y: [45, 0] }, { delay: stagger(0.2), duration: 1.0, easing: cinematicEase });
+            if (target) animate(target.querySelectorAll('.timeline-step'), { opacity: [0, 1], y: [45, 0] }, { delay: stagger(0.2), duration: 1.0, easing: cinematicEase });
         });
 
         inView('.size-chart-wrapper', ({ target }) => {
-            animate(target, { opacity: [0, 1], y: [35, 0] }, { duration: 1.05, easing: cinematicEase });
+            if (target) animate(target, { opacity: [0, 1], y: [35, 0] }, { duration: 1.05, easing: cinematicEase });
         });
 
         inView('.testi-slider-wrapper', ({ target }) => {
-            animate(target, { opacity: [0, 1], scale: [0.96, 1] }, { duration: 1.0, easing: cinematicEase });
+            if (target) animate(target, { opacity: [0, 1], scale: [0.96, 1] }, { duration: 1.0, easing: cinematicEase });
         });
 
         inView('.quick-order-card', ({ target }) => {
-            animate(target, { opacity: [0, 1], y: [40, 0], scale: [0.97, 1] }, { duration: 1.1, easing: cinematicEase });
+            if (target) animate(target, { opacity: [0, 1], y: [40, 0], scale: [0.97, 1] }, { duration: 1.1, easing: cinematicEase });
         });
     }
 
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastFocusedElement = null;
 
     function getVisibleItems() {
-        return Array.from(document.querySelectorAll('.portfolio-item:not(.hide)'));
+        return Array.from(document.querySelectorAll('.portfolio-item:not(.hide), .collar-card'));
     }
 
     function renderLightboxItem(index) {
@@ -242,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterContainer?.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             filterBtn.classList.add('active');
             const cat = filterBtn.dataset.filter;
-            document.querySelectorAll('.portfolio-item').forEach(item => {
+            document.querySelectorAll('#portfolio-grid .portfolio-item').forEach(item => {
                 const show = cat === 'all' || item.dataset.category === cat;
                 item.classList.toggle('hide', !show);
             });
@@ -258,8 +262,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Portfolio Item Click Trigger (Opens Lightbox Preview)
-        const itemCard = e.target.closest('.portfolio-item');
+        // Portfolio / Collar Item Click Trigger (Opens Lightbox Preview)
+        const itemCard = e.target.closest('.portfolio-item, .collar-card');
         if (itemCard) {
             openLightboxByElement(itemCard);
             return;
@@ -301,6 +305,71 @@ document.addEventListener('DOMContentLoaded', () => {
     dots.forEach((dot, i) => dot.addEventListener('click', () => { gotoSlide(i); resetTimer(); }));
 
     if (slides.length) resetTimer();
+
+    /* 4b. Collar Models Carousel Slider */
+    const collarTrack = document.getElementById('collar-track');
+    const collarPrev = document.getElementById('collar-prev');
+    const collarNext = document.getElementById('collar-next');
+    const collarCounterCurrent = document.getElementById('collar-current');
+    const collarDots = document.querySelectorAll('.collar-dot');
+    const collarCards = document.querySelectorAll('.collar-card');
+
+    if (collarTrack && collarCards.length > 0) {
+        function updateCollarActiveIndex() {
+            const scrollPos = collarTrack.scrollLeft;
+            const maxScrollLeft = collarTrack.scrollWidth - collarTrack.clientWidth;
+            
+            let activeIndex;
+            if (maxScrollLeft > 0 && scrollPos >= maxScrollLeft - 15) {
+                activeIndex = collarCards.length - 1;
+            } else {
+                const cardWidth = collarCards[0].offsetWidth + 20; // card width + gap
+                activeIndex = Math.min(
+                    collarCards.length - 1,
+                    Math.max(0, Math.round(scrollPos / cardWidth))
+                );
+            }
+
+            if (collarCounterCurrent) {
+                collarCounterCurrent.textContent = String(activeIndex + 1).padStart(2, '0');
+            }
+
+            collarDots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === activeIndex);
+            });
+        }
+
+        let isScrollTicking = false;
+        collarTrack.addEventListener('scroll', () => {
+            if (!isScrollTicking) {
+                window.requestAnimationFrame(() => {
+                    updateCollarActiveIndex();
+                    isScrollTicking = false;
+                });
+                isScrollTicking = true;
+            }
+        });
+
+        collarPrev?.addEventListener('click', () => {
+            const cardWidth = collarCards[0].offsetWidth + 20;
+            collarTrack.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        collarNext?.addEventListener('click', () => {
+            const cardWidth = collarCards[0].offsetWidth + 20;
+            collarTrack.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        collarDots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                const targetCard = collarCards[idx];
+                if (targetCard) {
+                    const targetLeft = targetCard.offsetLeft - collarTrack.offsetLeft;
+                    collarTrack.scrollTo({ left: targetLeft, behavior: 'smooth' });
+                }
+            });
+        });
+    }
 
     /* 5. Quick Order Form Handler */
     document.getElementById('quick-order-form')?.addEventListener('submit', (e) => {
